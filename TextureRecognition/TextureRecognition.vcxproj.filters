@@ -13,6 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Segmentation">
+      <UniqueIdentifier>{370988cf-525c-4232-8efa-0f6f1c1e377f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Binarization">
+      <UniqueIdentifier>{fc227ba1-3c0b-4491-9f38-7733f75d85cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classification">
+      <UniqueIdentifier>{56e6864c-aa8b-4458-8530-14d18497ac22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FeaturesExtraction">
+      <UniqueIdentifier>{855993d1-8ca1-46ae-8d05-077c5b321fef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Binarization">
+      <UniqueIdentifier>{7e0a9da2-f207-46bd-8b70-a7b9d643d53c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classification">
+      <UniqueIdentifier>{803cb8a6-483a-44af-a278-db5dd805fbff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FeaturesExtraction">
+      <UniqueIdentifier>{7e2af5d5-a8c5-4a2b-add6-db6455ce143e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Segmentation">
+      <UniqueIdentifier>{f79d3ac0-4f9d-4466-8730-a1d85e98203e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Preprocessing">
+      <UniqueIdentifier>{b1ef2b3e-a118-435b-aa56-20feddf31208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessing">
+      <UniqueIdentifier>{10163223-016e-42b2-9ec4-aa6240c22cac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,48 +54,69 @@
     <ClCompile Include="opencv2_Directory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleDominantColors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SimpleBlur.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="kNNClassifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Testing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CannyBinarization.cpp">
+      <Filter>Source Files\Binarization</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalEntropy.cpp">
+      <Filter>Source Files\Binarization</Filter>
+    </ClCompile>
+    <ClCompile Include="kNNClassifier.cpp">
+      <Filter>Source Files\Classification</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleDominantColors.cpp">
+      <Filter>Source Files\FeaturesExtraction</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleBlur.cpp">
+      <Filter>Source Files\Preprocessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Segmentation.cpp">
+      <Filter>Source Files\Segmentation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataSet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="opencv2_Directory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FeatureExtractor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleDominantColors.h">
+    <ClInclude Include="Testing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Preprocessing.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Preprocessing</Filter>
     </ClInclude>
     <ClInclude Include="SimpleBlur.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Preprocessing</Filter>
     </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Closing.h">
+      <Filter>Header Files\Preprocessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Segmentation.h">
+      <Filter>Header Files\Segmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="Binarization.h">
+      <Filter>Header Files\Binarization</Filter>
+    </ClInclude>
+    <ClInclude Include="CannyBinarization.h">
+      <Filter>Header Files\Binarization</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalEntropy.h">
+      <Filter>Header Files\Binarization</Filter>
     </ClInclude>
     <ClInclude Include="Classifier.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classification</Filter>
     </ClInclude>
     <ClInclude Include="kNNClassifier.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classification</Filter>
     </ClInclude>
-    <ClInclude Include="Testing.h">
+    <ClInclude Include="FeatureExtractor.h">
+      <Filter>Header Files\FeaturesExtraction</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleDominantColors.h">
+      <Filter>Header Files\FeaturesExtraction</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

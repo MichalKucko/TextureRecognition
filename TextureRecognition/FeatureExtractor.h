@@ -13,5 +13,5 @@ public:
 	* Returns set of features extracted from given image.
 	  \param img - image
 	*/
-	virtual cv::Mat extract(cv::Mat img) { return cv::Mat(); }
+	virtual cv::Mat extract(cv::Mat img, cv::Mat mask = cv::Mat()) = 0;
 };

@@ -1,6 +1,9 @@
 #pragma once
 #include <opencv2/core.hpp>
-#include "Enums.h"
+#include <opencv2/imgcodecs.hpp>
+#include "FeatureExtractor.h"
+#include "Preprocessing.h"
+#include "Binarization.h"
 
 using namespace std;
 
@@ -16,8 +19,12 @@ private:
 	/**
 	* path to folders containing images
 	*/
-	string imagesPath = "./database/";
+	string learnTestPath = "./database/set_learn";
+
+	string classifyPath = "./database/set_classify";
 	
+	int imreadFlag = cv::IMREAD_COLOR;
+
 	/**
 	* set of features get from images
 	*/
@@ -58,17 +65,30 @@ private:
 	*/
 	cv::Mat testClasses;
 
+	vector<cv::Mat> segmentImgs;
+
+	vector<cv::Mat> classifySet;
+
+	vector<string> classNames;
+
 	/**
-	* vector of sampes indices - internal variable used for shuffling dataset
+	* vector of samples indices - internal variable used for shuffling dataset
 	*/
 	vector<int> indices;
+
+	vector<Preprocessing*> preps;
+	vector<Binarization*> bins;
+	vector<Preprocessing*> binPreps;
 
 public:
 
 	/**
 	* Sets path to folders containing images.
 	*/
-	void setPath(string path) { imagesPath = path; }
+	void setLearnTestPath(string path) { learnTestPath = path; }
+
+	void setClassifyPath(string path) { classifyPath = path; }
+
 
 	/**
 	* Returns the whole dataset.
@@ -110,13 +130,31 @@ public:
 	*/
 	cv::Mat getShuffledClasses() { return shuffledClasses; }
 
+	vector<cv::Mat> getClassifySet() { return classifySet;  }
+
+	vector<cv::Mat> getSegmentImgs() { return segmentImgs; }
+
+	void addPreprocess(Preprocessing *prep) {
+		preps.push_back(prep);
+	}
+
+	void addBinarization(Binarization *bin) {
+		bins.push_back(bin);
+	}
+
+	void addBinPreprocess(Preprocessing *prep) {
+		binPreps.push_back(prep);
+	}
+
 	/**
 	* Reads images, optionally performs image preprocessing and extracts set of features.
 	  \param - preprocessType method used in image preprocessing
 	  \param - featuresType type of image features to be extracted
 	*/
-	int prepareSet(Preprocess preprocessType, Feature featuresType);
+	int prepareLearnTestSet(FeatureExtractor *feat);
 	
+	void prepareClassifySet(FeatureExtractor *feat, int minArea = 1000, int segmentsCnt = 10, bool show = false);
+
 	/**
 	* Randomly shuffles dataset and place the results in "shuffledSet" field.
 	*/
@@ -128,4 +166,10 @@ public:
 	  \param - learnToTestRatio ratio of lerning set size to testing set size
 	*/
 	void splitSet(float learnToTestRatio);
+
+	void clearSets();
+
+	void displayClassNames();
+
+	void clearMethods();
 };

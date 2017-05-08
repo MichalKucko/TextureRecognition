@@ -11,5 +11,5 @@ public:
 	* Applies preprocessing.
 	  \param img - image
 	*/
-	virtual void preprocess(cv::Mat &img) {};
+	virtual void preprocess(cv::Mat &src, cv::Mat &dst) = 0;
 };

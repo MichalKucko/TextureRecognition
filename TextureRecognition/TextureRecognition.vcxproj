@@ -154,22 +154,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CannyBinarization.cpp" />
     <ClCompile Include="DataSet.cpp" />
     <ClCompile Include="kNNClassifier.cpp" />
+    <ClCompile Include="LocalEntropy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opencv2_Directory.cpp" />
+    <ClCompile Include="Segmentation.cpp" />
     <ClCompile Include="SimpleBlur.cpp" />
     <ClCompile Include="SimpleDominantColors.cpp" />
     <ClCompile Include="Testing.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Binarization.h" />
+    <ClInclude Include="CannyBinarization.h" />
     <ClInclude Include="Classifier.h" />
+    <ClInclude Include="Closing.h" />
     <ClInclude Include="DataSet.h" />
-    <ClInclude Include="Enums.h" />
     <ClInclude Include="FeatureExtractor.h" />
     <ClInclude Include="kNNClassifier.h" />
+    <ClInclude Include="LocalEntropy.h" />
     <ClInclude Include="opencv2_Directory.h" />
     <ClInclude Include="Preprocessing.h" />
+    <ClInclude Include="Segmentation.h" />
     <ClInclude Include="SimpleBlur.h" />
     <ClInclude Include="SimpleDominantColors.h" />
     <ClInclude Include="Testing.h" />

@@ -28,5 +28,5 @@ public:
 	*/
 	void setSize(int _size) { size = _size; };
 
-	void preprocess(cv::Mat &img);
+	void preprocess(cv::Mat &src, cv::Mat &dst);
 };

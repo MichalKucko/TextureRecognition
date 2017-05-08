@@ -33,5 +33,5 @@ public:
 	*/
 	void setParams(int _histSize, int _howManyColors);
 
-	cv::Mat extract(cv::Mat img);
+	cv::Mat extract(cv::Mat img, cv::Mat mask = cv::Mat());
 };

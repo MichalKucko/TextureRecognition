@@ -1,6 +1,6 @@
 #pragma once
 #include <opencv2/core.hpp>
-#include "Enums.h"
+#include "Classifier.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ public:
 	  \param cl - label of class, for which scores are computed
 	  \return set of scores in the following order: TP, FP, TN, FN, tp rate, fp rate, precision, accuracy, specifity
 	*/
-	static cv::Mat test(cv::Mat classes, cv::Mat responses, int cl);
+	static void test(cv::Mat classes, cv::Mat responses, int cl, cv::Mat &tests, bool push = true);
 
 	/**
 	* Print test scores obtained from "test" method.
@@ -33,5 +33,7 @@ public:
 	  \param classesCnt - how many classes are present in dataset
 	  \param k - into how many subsets the original set should be divided
 	*/
-	static cv::Mat crossValidation(cv::Mat set, cv::Mat classes, Classification method, int classesCnt, int k = 10);
+	static cv::Mat crossValidation(cv::Mat set, cv::Mat classes, Classifier *classifier, int classesCnt, int k = 10);
+
+	static void displayClassifiedSegments(vector<cv::Mat> &set, vector<cv::Mat> &segmentImgs, Classifier *classifier, int maxClass);
 };

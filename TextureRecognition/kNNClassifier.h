@@ -41,4 +41,6 @@ public:
 	void train(cv::Mat set, cv::Mat classes);
 
 	cv::Mat classify(cv::Mat set);
+
+	cv::Mat classifySegments(cv::Mat set, cv::Mat &segmentsImg, int maxClass);
 };

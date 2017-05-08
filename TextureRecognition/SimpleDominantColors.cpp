@@ -8,16 +8,16 @@ void SimpleDominantColors::setParams(int _histSize, int _howManyColors) {
 }
 
 
-cv::Mat SimpleDominantColors::extract(cv::Mat img) {
+cv::Mat SimpleDominantColors::extract(cv::Mat img, cv::Mat mask) {
 	cv::Mat hsvImg;
 	cv::cvtColor(img, hsvImg, CV_BGR2HSV);
 	vector<cv::Mat> hsvImgs(3);
 	split(img, hsvImgs);
 
-	float range[] = { 0, histSize };
+	float range[] = { 0, 180 };
 	const float* histRange = { range };
 	cv::Mat hueHist;
-	cv::calcHist(&hsvImgs[0], 1, 0, cv::Mat(), hueHist, 1, &histSize, &histRange);
+	cv::calcHist(&hsvImgs[0], 1, 0, mask, hueHist, 1, &histSize, &histRange);
 
 	//cv::Mat dominantCols(1, howManyColors, CV_32F);
 	cv::Mat dominantCols;

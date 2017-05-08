@@ -1,8 +1,9 @@
 #include "Testing.h"
-#include "kNNClassifier.h"
+#include <iostream>
+#include <opencv2/highgui.hpp>
 
 
-cv::Mat Testing::test(cv::Mat classes, cv::Mat responses, int cl) {
+void Testing::test(cv::Mat classes, cv::Mat responses, int cl, cv::Mat &tests, bool push) {
 	float tp = 0, tn = 0, fp = 0, fn = 0, p = 0, n = 0;
 	int class_i, response_i;
 	for (int i = 0; i < classes.rows; i++) {
@@ -37,18 +38,21 @@ cv::Mat Testing::test(cv::Mat classes, cv::Mat responses, int cl) {
 	float specifity = 0;
 	if (fp + tn) specifity = tn / (fp + tn);
 
-	cv::Mat tests;
-	tests.push_back(tp);
-	tests.push_back(fp);
-	tests.push_back(tn);
-	tests.push_back(fn);
-	tests.push_back(tpRate);
-	tests.push_back(fpRate);
-	tests.push_back(precision);
-	tests.push_back(accuracy);
-	tests.push_back(specifity);
-
-	return tests.t();
+	cv::Mat testsCol;
+	testsCol.push_back(tp);
+	testsCol.push_back(fp);
+	testsCol.push_back(tn);
+	testsCol.push_back(fn);
+	testsCol.push_back(tpRate);
+	testsCol.push_back(fpRate);
+	testsCol.push_back(precision);
+	testsCol.push_back(accuracy);
+	testsCol.push_back(specifity);
+	
+	if (push)
+		tests.push_back(testsCol.t());
+	else
+		tests = testsCol.clone().t();
 }
 
 
@@ -68,13 +72,9 @@ void Testing::printTestResults(cv::Mat tests) {
 }
 
 
-cv::Mat Testing::crossValidation(cv::Mat set, cv::Mat classes, Classification method, int classesCnt, int k) {	
-	Classifier *classifier = new Classifier();
-	if (method == KNN)
-		classifier = new kNNClassifier();
-
+cv::Mat Testing::crossValidation(cv::Mat set, cv::Mat classes, Classifier *classifier, int classesCnt, int k) {	
 	int step = set.rows / k;
-	cv::Mat responses, tests;
+	cv::Mat responses, tests, singleTest;
 	for (int i = 0; i < k; i++) {
 		cv::Mat learnSet, testSet, learnClasses, testClasses;
 		if (i == 0) {
@@ -104,13 +104,14 @@ cv::Mat Testing::crossValidation(cv::Mat set, cv::Mat classes, Classification me
 
 		if (i == 0) {
 			for (int j = 1; j <= classesCnt; j++) {
-				tests.push_back(test(testClasses, responses, j));
+				test(testClasses, responses, j, tests);
 			}
 			//cout << tests << endl;
 		}
 		else {
 			for (int j = 1; j <= classesCnt; j++) {
-				tests.row(j-1) += test(testClasses, responses, j);
+				test(testClasses, responses, j, singleTest, false);
+				tests.row(j-1) += singleTest;
 			}
 			//cout << tests << endl;
 		}
@@ -120,4 +121,12 @@ cv::Mat Testing::crossValidation(cv::Mat set, cv::Mat classes, Classification me
 	printTestResults(tests);
 
 	return tests;
+}
+
+
+void Testing::displayClassifiedSegments(vector<cv::Mat> &set, vector<cv::Mat> &segmentImgs, Classifier *classifier, int maxClass) {
+	for (int i = 0; i < set.size(); i++) {
+		classifier->classifySegments(set[i], segmentImgs[i], maxClass);
+		cv::imshow("Classified" + to_string(i), segmentImgs[i]);
+	}
 }
